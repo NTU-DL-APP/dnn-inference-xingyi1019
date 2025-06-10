@@ -15,7 +15,7 @@ model = tf.keras.Sequential([
 
 # Compile and train
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-model.fit(x_train, y_train, epochs=15, validation_data=(x_test, y_test))
+model.fit(x_train, y_train, epochs=25, validation_data=(x_test, y_test))
 
 # Save model
 model.save('fashion_mnist.h5')

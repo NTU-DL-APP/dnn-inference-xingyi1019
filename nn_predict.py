@@ -8,10 +8,16 @@ def relu(x):
 
 def softmax(x):
     x = np.array(x)
-    shifted_x = x - np.max(x, axis=-1, keepdims=True)  # 防止 overflow
-    exp_x = np.exp(shifted_x)
-    sum_exp_x = np.sum(exp_x, axis=-1, keepdims=True)
-    return exp_x / sum_exp_x
+    if x.ndim == 1:
+        shifted_x = x - np.max(x)
+        exp_x = np.exp(shifted_x)
+        return exp_x / np.sum(exp_x)
+    elif x.ndim == 2:
+        shifted_x = x - np.max(x, axis=1, keepdims=True)
+        exp_x = np.exp(shifted_x)
+        return exp_x / np.sum(exp_x, axis=1, keepdims=True)
+    else:
+        raise ValueError("Input must be 1D or 2D array")
 
 
 # === Flatten ===
